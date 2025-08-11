@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using dotenv.net;
 
 using api.Data;
+using api.Repositories;
+using api.Services;
 
 DotEnv.Load();
 
@@ -16,6 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 );
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+// Repo and Service Mappings
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -27,5 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();
