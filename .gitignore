@@ -1,0 +1,27 @@
+# General
+.vscode/
+**/.env
+.DS_Store
+*.save
+*.tmp
+
+# .NET
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Local database files
+*.db
+*.db-shm
+*.db-wal
+
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+
+# EditorConfig browser cache
+*.log
