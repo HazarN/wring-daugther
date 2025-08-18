@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using api.Models;
+using api.Entities;
 
 namespace api.Data
 {
@@ -27,7 +27,7 @@ namespace api.Data
                     Id = 1,
                     Username = "HazarN",
                     Email = "hazar@example.com",
-                    Password = "hashed_password_1",
+                    PasswordHashed = "hashed_password_1",
                     CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, DateTimeKind.Utc),
                     IsAdmin = true
                 },
@@ -36,7 +36,7 @@ namespace api.Data
                     Id = 2,
                     Username = "JohnD",
                     Email = "john@example.com",
-                    Password = "hashed_password_2",
+                    PasswordHashed = "hashed_password_2",
                     CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, DateTimeKind.Utc),
                     IsAdmin = false
                 },
@@ -45,7 +45,7 @@ namespace api.Data
                     Id = 3,
                     Username = "JaneD",
                     Email = "jane@example.com",
-                    Password = "hashed_password_3",
+                    PasswordHashed = "hashed_password_3",
                     CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, DateTimeKind.Utc),
                     IsAdmin = false
                 }

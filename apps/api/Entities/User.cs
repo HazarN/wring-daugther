@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api.Models
+namespace api.Entities
 {
     public class User
     {
@@ -16,10 +16,10 @@ namespace api.Models
         public required string Email { get; set; }
 
         [Required]
-        public required string Password { get; set; }
+        public required string PasswordHashed { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public bool IsAdmin { get; set; } = true;
+        public bool IsAdmin { get; set; } = false;
     }
 }
