@@ -6,29 +6,31 @@ namespace api.Services
     public class UserService(IUserRepository userRepository) : IUserService
     {
 
-        public Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
-            return userRepository.GetUsersAsync();
+            var users = await userRepository.GetUsersAsync();
+            return users;
         }
 
-        public Task<User?> GetUserById(int id)
+        public async Task<User?> GetUserByIdAsync(int id)
         {
-            return userRepository.GetUserByIdAsync(id);
+            var user = await userRepository.GetUserByIdAsync(id);
+            return user;
         }
 
-        public Task CreateUser(User user)
+        public async Task CreateUserAsync(User user)
         {
-            return userRepository.CreateUserAsync(user);
+            await userRepository.CreateUserAsync(user);
         }
 
-        public Task UpdateUser(User user)
+        public async Task UpdateUserAsync(User user)
         {
-            return userRepository.UpdateUserAsync(user);
+            await userRepository.UpdateUserAsync(user);
         }
 
-        public Task DeleteUser(int id)
+        public async Task DeleteUserAsync(int id)
         {
-            return userRepository.DeleteUserAsync(id);
+            await userRepository.DeleteUserAsync(id);
         }
     }
 }

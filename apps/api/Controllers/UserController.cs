@@ -9,11 +9,10 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class UsersController(IUserService userService) : ControllerBase
     {
-
         [HttpGet]
         public async Task<ActionResult<User>> GetAll()
         {
-            var users = await userService.GetUsers();
+            var users = await userService.GetUsersAsync();
             return Ok(users);
         }
     }
