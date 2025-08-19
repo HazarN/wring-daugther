@@ -11,9 +11,9 @@ using api.Data;
 
 namespace api.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250818204549_PasswordNameChange")]
-    partial class PasswordNameChange
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20250819190133_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("api.Models.User", b =>
+            modelBuilder.Entity("api.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

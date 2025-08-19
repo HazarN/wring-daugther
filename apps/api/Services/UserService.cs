@@ -3,14 +3,8 @@ using api.Repositories;
 
 namespace api.Services
 {
-    public class UserService : IUserService
+    public class UserService(IUserRepository userRepository) : IUserService
     {
-        private readonly IUserRepository userRepository;
-
-        public UserService(IUserRepository userRepository)
-        {
-            this.userRepository = userRepository;
-        }
 
         public Task<List<User>> GetUsers()
         {

@@ -4,15 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(AppDbContext context) : IUserRepository
     {
-        private readonly ApplicationDbContext context;
-
-        public UserRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
         public async Task<List<User>> GetUsersAsync()
         {
             return await context.Users.ToListAsync();

@@ -7,19 +7,13 @@ namespace api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController(IUserService userService) : ControllerBase
     {
-        private readonly IUserService service;
-
-        public UsersController(IUserService service)
-        {
-            this.service = service;
-        }
 
         [HttpGet]
         public async Task<ActionResult<User>> GetAll()
         {
-            var users = await service.GetUsers();
+            var users = await userService.GetUsers();
             return Ok(users);
         }
     }

@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api.Data;
@@ -11,12 +10,10 @@ using api.Data;
 
 namespace api.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250811174023_UserSeed")]
-    partial class UserSeed
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("api.Models.User", b =>
+            modelBuilder.Entity("api.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +41,7 @@ namespace api.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHashed")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -64,7 +61,7 @@ namespace api.Migrations
                             CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "hazar@example.com",
                             IsAdmin = true,
-                            Password = "hashed_password_1",
+                            PasswordHashed = "hashed_password_1",
                             Username = "HazarN"
                         },
                         new
@@ -73,7 +70,7 @@ namespace api.Migrations
                             CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "john@example.com",
                             IsAdmin = false,
-                            Password = "hashed_password_2",
+                            PasswordHashed = "hashed_password_2",
                             Username = "JohnD"
                         },
                         new
@@ -82,7 +79,7 @@ namespace api.Migrations
                             CreatedAt = new DateTime(2001, 11, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "jane@example.com",
                             IsAdmin = false,
-                            Password = "hashed_password_3",
+                            PasswordHashed = "hashed_password_3",
                             Username = "JaneD"
                         });
                 });
