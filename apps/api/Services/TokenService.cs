@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 using api.Entities;
+using api.Exceptions;
 
 namespace api.Services
 {
@@ -13,7 +14,7 @@ namespace api.Services
         {
             var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
             if (string.IsNullOrEmpty(secret))
-                throw new Exception("You need to set a JWT secret in a .env file");
+                throw new DotEnvException("JWT_SECRET");
 
             var claims = new List<Claim>
             {

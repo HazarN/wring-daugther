@@ -1,18 +1,49 @@
+using Microsoft.AspNetCore.Identity;
+
 using api.Entities;
 using api.Models;
+using api.Repositories;
 
 namespace api.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService(IUserRepository userRepository, ITokenService tokenService) : IAuthService
     {
-        public Task<User?> RegisterAsync(UserDto request)
+        public async Task<User?> RegisterAsync(UserDto request)
         {
-            throw new NotImplementedException();
+            // A user with existent username cannot be registered
+            if (await userRepository.AnyUserWithUsernameAsync(request.Username))
+                return null;
+
+            // Password will be set after hashing
+            var user = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                PasswordHashed = ""
+            };
+
+            var hashedPassword = new PasswordHasher<User>()
+                .HashPassword(user, request.Password);
+
+            user.PasswordHashed = hashedPassword;
+            if (request.IsAdmin) user.IsAdmin = request.IsAdmin;
+
+            await userRepository.CreateUserAsync(user);
+            return user;
         }
 
-        public Task<string?> LoginAsync(UserDto request)
+        public async Task<string?> LoginAsync(UserDto request)
         {
-            throw new NotImplementedException();
+            var user = await userRepository.GetUserByUsernameAsync(request.Username);
+
+            if (user == null) return null;
+
+            bool doesMatch = new PasswordHasher<User>()
+                .VerifyHashedPassword(user, user.PasswordHashed, request.Password) == PasswordVerificationResult.Failed;
+
+            if (!doesMatch) return null;
+
+            return tokenService.CreateToken(user);
         }
     }
 }

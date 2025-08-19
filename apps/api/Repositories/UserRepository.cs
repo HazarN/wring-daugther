@@ -16,6 +16,11 @@ namespace api.Repositories
             return await context.Users.FindAsync(id);
         }
 
+        public async Task<User?> GetUserByUsernameAsync(string username)
+        {
+            return await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+        }
+
         public async Task CreateUserAsync(User user)
         {
             context.Users.Add(user);
@@ -37,6 +42,11 @@ namespace api.Repositories
                 context.Users.Remove(user);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> AnyUserWithUsernameAsync(string username)
+        {
+            return await context.Users.AnyAsync(u => u.Username == username);
         }
     }
 }
