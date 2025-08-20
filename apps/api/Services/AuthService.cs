@@ -43,7 +43,7 @@ namespace api.Services
 
             if (failedPassword) return null;
 
-            return tokenService.CreateToken(user);
+            return tokenService.CreateAccessToken(user);
         }
     }
 }

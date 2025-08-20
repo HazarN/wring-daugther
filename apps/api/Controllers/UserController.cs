@@ -10,6 +10,7 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class UsersController(IUserService userService) : ControllerBase
     {
+        [Authorize(Policy = "AdminOnly")]
         [HttpGet]
         public async Task<ActionResult<User>> GetAll()
         {

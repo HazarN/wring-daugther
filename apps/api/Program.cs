@@ -55,6 +55,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Authorization Rule
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("isAdmin", "True"));
+});
+
 builder.WebHost.UseUrls($"http://localhost:{port}");
 
 var app = builder.Build();

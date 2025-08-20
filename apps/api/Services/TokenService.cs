@@ -10,7 +10,7 @@ namespace api.Services
 {
     public class TokenService(IConfiguration configuration) : ITokenService
     {
-        public string CreateToken(User user)
+        public string CreateAccessToken(User user)
         {
             var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
             if (string.IsNullOrEmpty(secret))
