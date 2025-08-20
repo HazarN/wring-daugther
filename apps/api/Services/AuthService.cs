@@ -32,16 +32,16 @@ namespace api.Services
             return user;
         }
 
-        public async Task<string?> LoginAsync(UserDto request)
+        public async Task<string?> LoginAsync(LoginRequestDto request)
         {
             var user = await userRepository.GetUserByUsernameAsync(request.Username);
 
             if (user == null) return null;
 
-            bool doesMatch = new PasswordHasher<User>()
+            bool failedPassword = new PasswordHasher<User>()
                 .VerifyHashedPassword(user, user.PasswordHashed, request.Password) == PasswordVerificationResult.Failed;
 
-            if (!doesMatch) return null;
+            if (failedPassword) return null;
 
             return tokenService.CreateToken(user);
         }
