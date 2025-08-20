@@ -21,5 +21,9 @@ namespace api.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool IsAdmin { get; set; } = false;
+
+        public string? RefreshToken { get; set; }
+
+        public DateTime? RefreshTokenExpiryDate { get; set; }
     }
 }

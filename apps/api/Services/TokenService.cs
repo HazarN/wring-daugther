@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using api.Entities;
 using api.Exceptions;
+using System.Security.Cryptography;
 
 namespace api.Services
 {
@@ -34,11 +35,19 @@ namespace api.Services
                 issuer: configuration.GetValue<string>("Jwt:Issuer"),
                 audience: configuration.GetValue<string>("Jwt:Audience"),
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.UtcNow.AddMinutes(15),
                 signingCredentials: credentials
             );
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+        }
+
+        public string CreateRefreshToken()
+        {
+            var token = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(token);
+            return Convert.ToBase64String(token);
         }
     }
 }

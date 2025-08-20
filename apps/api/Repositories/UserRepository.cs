@@ -6,6 +6,11 @@ namespace api.Repositories
 {
     public class UserRepository(AppDbContext context) : IUserRepository
     {
+        public async Task SaveAsync()
+        {
+            await context.SaveChangesAsync();
+        }
+
         public async Task<List<User>> GetUsersAsync()
         {
             return await context.Users.ToListAsync();

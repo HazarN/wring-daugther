@@ -4,6 +4,7 @@ namespace api.Repositories
 {
     public interface IUserRepository
     {
+        Task SaveAsync();
         Task<List<User>> GetUsersAsync();
         Task<User?> GetUserByIdAsync(int id);
         Task<User?> GetUserByUsernameAsync(string username);

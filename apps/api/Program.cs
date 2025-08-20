@@ -51,17 +51,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(secret)
             ),
-            ValidateIssuerSigningKey = true
+            ValidateIssuerSigningKey = true,
         };
     });
 
 // Authorization Rule
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("isAdmin", "True"));
-});
-
-builder.WebHost.UseUrls($"http://localhost:{port}");
+builder.Services
+    .AddAuthorizationBuilder()
+    .AddPolicy("AdminOnly", policy => policy.RequireClaim("isAdmin", "True"));
 
 var app = builder.Build();
 
@@ -73,4 +70,5 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
+builder.WebHost.UseUrls($"http://localhost:{port}");
 app.Run();

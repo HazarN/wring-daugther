@@ -20,13 +20,23 @@ namespace api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(LoginRequestDto request)
+        public async Task<ActionResult<TokenResponseDto>> Login(LoginRequestDto request)
         {
-            var token = await authService.LoginAsync(request);
-            if (token == null)
+            var res = await authService.LoginAsync(request);
+            if (res == null)
                 return BadRequest("Invalid username or password");
 
-            return Ok(token);
+            return Ok(res);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDto request)
+        {
+            var res = await authService.RefreshTokensAsync(request);
+            if (res == null)
+                return Unauthorized("Invalid refresh token");
+
+            return Ok(res);
         }
     }
 }

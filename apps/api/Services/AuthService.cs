@@ -32,7 +32,7 @@ namespace api.Services
             return user;
         }
 
-        public async Task<string?> LoginAsync(LoginRequestDto request)
+        public async Task<TokenResponseDto?> LoginAsync(LoginRequestDto request)
         {
             var user = await userRepository.GetUserByUsernameAsync(request.Username);
 
@@ -43,7 +43,44 @@ namespace api.Services
 
             if (failedPassword) return null;
 
-            return tokenService.CreateAccessToken(user);
+            return await CreateTokenResponseDto(user);
+        }
+
+        public async Task<TokenResponseDto?> RefreshTokensAsync(RefreshTokenRequestDto request)
+        {
+            var user = await ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
+            if (user == null)
+                return null;
+
+            return await CreateTokenResponseDto(user);
+        }
+
+        private async Task<TokenResponseDto?> CreateTokenResponseDto(User user)
+        {
+            return new TokenResponseDto
+            {
+                AccessToken = tokenService.CreateAccessToken(user),
+                RefreshToken = await SaveRefreshTokenAsync(user)
+            };
+        }
+        private async Task<User?> ValidateRefreshTokenAsync(int userId, string refreshToken)
+        {
+            var user = await userRepository.GetUserByIdAsync(userId);
+
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryDate <= DateTime.UtcNow)
+                return null;
+
+            return user;
+        }
+        private async Task<string> SaveRefreshTokenAsync(User user)
+        {
+            var token = tokenService.CreateRefreshToken();
+
+            user.RefreshToken = token;
+            user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(14);
+            await userRepository.SaveAsync();
+
+            return token;
         }
     }
 }
