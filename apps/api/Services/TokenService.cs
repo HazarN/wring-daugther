@@ -35,7 +35,7 @@ namespace api.Services
                 issuer: configuration.GetValue<string>("Jwt:Issuer"),
                 audience: configuration.GetValue<string>("Jwt:Audience"),
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(15),
+                expires: DateTime.UtcNow.AddMinutes(5),
                 signingCredentials: credentials
             );
 

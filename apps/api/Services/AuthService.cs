@@ -46,6 +46,19 @@ namespace api.Services
             return await CreateTokenResponseDto(user);
         }
 
+        public async Task<bool> LogoutAsync(int userId)
+        {
+            var user = await userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return false;
+
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryDate = null;
+            await userRepository.SaveAsync();
+
+            return true;
+        }
+
         public async Task<TokenResponseDto?> RefreshTokensAsync(RefreshTokenRequestDto request)
         {
             var user = await ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
@@ -53,6 +66,21 @@ namespace api.Services
                 return null;
 
             return await CreateTokenResponseDto(user);
+        }
+
+        public async Task<UserResponseDto?> GetAuthUserAsync(int userId)
+        {
+            var user = await userRepository.GetUserByIdAsync(userId);
+            if (user == null)
+                return null;
+
+            return new UserResponseDto
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email,
+                IsAdmin = user.IsAdmin
+            };
         }
 
         private async Task<TokenResponseDto?> CreateTokenResponseDto(User user)
