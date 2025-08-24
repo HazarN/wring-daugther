@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using api.Entities;
 using api.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers
 {

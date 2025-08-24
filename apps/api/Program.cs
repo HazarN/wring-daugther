@@ -1,15 +1,15 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
+using System.Text;
 using dotenv.net;
 
 using api.Data;
 using api.Repositories;
 using api.Services;
-using Scalar.AspNetCore;
 using api.Exceptions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 DotEnv.Load();
 
