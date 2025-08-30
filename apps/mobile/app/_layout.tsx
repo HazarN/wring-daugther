@@ -2,7 +2,7 @@ import { Merriweather_400Regular, useFonts } from '@expo-google-fonts/merriweath
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
-import ThemeProvider from '@context/Theme';
+import ThemeProvider from '@context/theme/ThemeProvider';
 
 import '@styles/globals.css';
 

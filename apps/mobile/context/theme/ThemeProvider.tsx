@@ -1,13 +1,10 @@
 import Constants from 'expo-constants';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
+import ThemeContext from '@context/theme/ThemeContext';
+
 type ThemeType = 'light' | 'dark';
-
-// Context
-const ThemeContext = createContext({ theme: 'light', toggle: () => {} });
-
-// Provider
 type Props = {
   children: React.ReactNode;
 };
@@ -36,11 +33,6 @@ function ThemeProvider({ children }: Props) {
       {children}
     </ThemeContext.Provider>
   );
-}
-
-// Hook
-export function useTheme() {
-  return useContext(ThemeContext);
 }
 
 export default ThemeProvider;
