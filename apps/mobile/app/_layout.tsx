@@ -1,4 +1,4 @@
-import { Merriweather_400Regular, useFonts } from '@expo-google-fonts/merriweather';
+import { RobotoMono_400Regular, useFonts } from '@expo-google-fonts/roboto-mono';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
@@ -7,7 +7,7 @@ import ThemeProvider from '@context/theme/ThemeProvider';
 import '@styles/globals.css';
 
 function Layout() {
-  const fonts = useFonts({ Merriweather_400Regular });
+  const fonts = useFonts({ RobotoMono_400Regular });
   if (!fonts) return null;
 
   return (
