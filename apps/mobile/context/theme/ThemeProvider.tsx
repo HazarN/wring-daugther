@@ -13,8 +13,8 @@ function ThemeProvider({ children }: Props) {
   const appTheme = Constants.expoConfig?.userInterfaceStyle ?? 'system';
 
   const [theme, setTheme] = useState<ThemeType>((): ThemeType => {
-    if (appTheme === 'system') return (systemScheme ?? 'light') as ThemeType;
-    return (appTheme ?? 'light') as ThemeType;
+    if (appTheme === 'system') return (systemScheme ?? 'dark') as ThemeType;
+    return (appTheme ?? 'dark') as ThemeType;
   });
 
   useEffect(() => {

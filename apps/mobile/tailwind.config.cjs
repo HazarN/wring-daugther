@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './app/**/*.{js,jsx,ts,tsx}',
+    './features/**/*.{js,jsx,ts,tsx}',
+    './ui/**/*.{js,jsx,ts,tsx}',
+  ],
   presets: [require('nativewind/preset')],
   darkMode: 'class',
   theme: {
@@ -24,7 +28,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        dactilo: ['Merriweather', 'serif'],
+        dactilo: ['RobotoMono_400Regular'],
       },
     },
   },
