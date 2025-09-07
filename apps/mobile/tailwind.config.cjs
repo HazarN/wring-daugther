@@ -20,7 +20,7 @@ module.exports = {
         },
         text: {
           light: '#222222',
-          dark: '#e5e5e5',
+          dark: '#ffffff',
         },
         border: {
           light: '#444444',

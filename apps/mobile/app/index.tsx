@@ -1,12 +1,19 @@
-import { SafeAreaView, Text } from 'react-native';
+import { useTheme } from '@hooks/useTheme';
+import { Text, View } from 'react-native';
 
 function Home() {
+  const { theme } = useTheme();
+
   return (
-    <SafeAreaView className='flex-1 justify-center items-center bg-background-light dark:bg-background-dark'>
-      <Text className='text-2xl text-text-light dark:text-text-dark font-dactilo'>
+    <View className='flex-1 justify-center items-center'>
+      <Text
+        className={`text-2xl font-dactilo ${
+          theme === 'dark' ? 'text-text-dark' : 'text-text-light'
+        }`}
+      >
         Wring Daugther Mobile App
       </Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
