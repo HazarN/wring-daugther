@@ -1,5 +1,6 @@
-import { useTheme } from '@hooks/useTheme';
 import { Pressable, PressableProps } from 'react-native';
+
+import { useTheme } from '@hooks/useTheme';
 
 import ThemedText from '@ui/ThemedText';
 
@@ -22,7 +23,8 @@ function ThemedButton({ children, className, full, onPress }: Props) {
             : 'bg-surface-light border-border-light active:bg-surface-light-hover'
         }
         ${className}
-    `}
+      `}
+      onPress={onPress}
     >
       <ThemedText className='text-center'>{children}</ThemedText>
     </Pressable>

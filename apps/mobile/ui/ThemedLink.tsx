@@ -1,6 +1,7 @@
 import { Link, LinkProps } from 'expo-router';
 
 import { useTheme } from '@hooks/useTheme';
+
 import ThemedText from '@ui/ThemedText';
 
 type Props = {

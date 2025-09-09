@@ -7,11 +7,14 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
-import ThemeProvider from '@context/theme/ThemeProvider';
 import { useTheme } from '@hooks/useTheme';
 import { useThemedStack } from '@hooks/useThemedStack';
-import '@styles/globals.css';
+
+import ThemeProvider from '@context/theme/ThemeProvider';
+
 import ThemeIcon from '@ui/ThemeIcon';
+
+import '@styles/globals.css';
 
 // Main layout is separated with an AppContent to be able to use theme provider
 const AppContent = () => {
