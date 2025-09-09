@@ -28,7 +28,9 @@ const AppContent = () => {
           headerRight: () => <ThemeIcon />,
         }}
       >
-        <Stack.Screen name='index' options={{ title: 'Home' }} />
+        <Stack.Screen name='index' options={{ title: '' }} />
+        <Stack.Screen name='(auth)/login' options={{ title: 'Login' }} />
+        <Stack.Screen name='(auth)/signup' options={{ title: 'Sign Up' }} />
       </Stack>
     </View>
   );

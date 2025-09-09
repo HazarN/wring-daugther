@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import ThemedButton from '@ui/ThemedButton';
+import ThemedLink from '@ui/ThemedLink';
 import ThemedText from '@ui/ThemedText';
 
 function Home() {
@@ -13,9 +13,9 @@ function Home() {
         <ThemedText className='text-xl'>Nothing special here.</ThemedText>
       </View>
 
-      <ThemedButton className='mb-10' full>
-        Check In
-      </ThemedButton>
+      <ThemedLink to='/login' className='mb-10' full>
+        <ThemedText>Check In</ThemedText>
+      </ThemedLink>
     </View>
   );
 }
