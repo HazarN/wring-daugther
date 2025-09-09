@@ -22,7 +22,12 @@ const AppContent = () => {
   const options = useThemedStack();
 
   return (
-    <View className={theme === 'dark' ? 'dark flex-1' : 'flex-1'}>
+    <View
+      className={`
+      flex-1
+      ${theme === 'dark' ? 'dark' : ''}
+      `}
+    >
       <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
 
       <Stack

@@ -15,7 +15,7 @@ function ThemedButton({ children, className, full, onPress }: Props) {
 
   return (
     <Pressable
-      className={`rounded-2xl border py-6
+      className={`rounded-2xl border py-12
         ${full ? 'w-full' : 'px-20'}
         ${
           theme === 'dark'
