@@ -6,14 +6,16 @@ import ThemedText from '@ui/ThemedText';
 type Props = {
   children: React.ReactNode;
   className?: PressableProps['className'];
+  full?: boolean;
   onPress?: () => {};
 };
-function ThemedButton({ children, className, onPress }: Props) {
+function ThemedButton({ children, className, full, onPress }: Props) {
   const { theme } = useTheme();
 
   return (
     <Pressable
-      className={`px-20 py-6 rounded-2xl border
+      className={`rounded-2xl border py-6
+        ${full ? 'w-full' : 'px-20'}
         ${
           theme === 'dark'
             ? 'bg-surface-dark border-border-dark active:bg-surface-dark-hover'
@@ -22,7 +24,7 @@ function ThemedButton({ children, className, onPress }: Props) {
         ${className}
     `}
     >
-      <ThemedText>{children}</ThemedText>
+      <ThemedText className='text-center'>{children}</ThemedText>
     </Pressable>
   );
 }
