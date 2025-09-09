@@ -1,4 +1,8 @@
-import { RobotoMono_400Regular, useFonts } from '@expo-google-fonts/roboto-mono';
+import {
+  RobotoMono_400Regular,
+  RobotoMono_500Medium,
+  useFonts,
+} from '@expo-google-fonts/roboto-mono';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
@@ -9,18 +13,8 @@ import { useThemedStack } from '@hooks/useThemedStack';
 import '@styles/globals.css';
 import ThemeIcon from '@ui/ThemeIcon';
 
-export default function RootLayout() {
-  const fontsLoaded = useFonts({ RobotoMono_400Regular });
-  if (!fontsLoaded) throw new Error('Fonts cannot be applied to the app');
-
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
-  );
-}
-
-function AppContent() {
+// Main layout is separated with an AppContent to be able to use theme provider
+const AppContent = () => {
   const { theme } = useTheme();
   const options = useThemedStack();
 
@@ -37,5 +31,16 @@ function AppContent() {
         <Stack.Screen name='index' options={{ title: 'Home' }} />
       </Stack>
     </View>
+  );
+};
+
+export default function RootLayout() {
+  const fontsLoaded = useFonts({ RobotoMono_400Regular, RobotoMono_500Medium });
+  if (!fontsLoaded) throw new Error('Fonts cannot be applied to the app');
+
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }

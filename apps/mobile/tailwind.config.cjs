@@ -17,6 +17,8 @@ module.exports = {
         surface: {
           light: '#ffffff',
           dark: '#1e1e1e',
+          'light-hover': '#f2f2f2',
+          'dark-hover': '#2a2a2a',
         },
         text: {
           light: '#222222',
@@ -29,6 +31,7 @@ module.exports = {
       },
       fontFamily: {
         dactilo: ['RobotoMono_400Regular'],
+        boldtilo: ['RobotoMono_500Medium'],
       },
     },
   },
