@@ -13,7 +13,7 @@ function Home() {
         <ThemedText className='text-xl'>Nothing special here.</ThemedText>
       </View>
 
-      <ThemedLink to='/signup' className='mb-10' full>
+      <ThemedLink to='/login' className='mb-10' full>
         <ThemedText>Check In</ThemedText>
       </ThemedLink>
     </View>

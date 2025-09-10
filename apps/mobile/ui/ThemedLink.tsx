@@ -23,7 +23,7 @@ function ThemedLink({ children, className, to, full }: Props) {
             ? 'bg-surface-dark border-border-dark active:bg-surface-dark-hover'
             : 'bg-surface-light border-border-light active:bg-surface-light-hover'
         }
-    ${className}`}
+        ${className}`}
     >
       <ThemedText className='text-center hover:bg-inherit'>{children}</ThemedText>
     </Link>

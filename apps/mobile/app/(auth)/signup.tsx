@@ -2,6 +2,7 @@ import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
 import ThemedInput from '@ui/ThemedInput';
 import ThemedText from '@ui/ThemedText';
+import { Link } from 'expo-router';
 import { useState } from 'react';
 
 function Signup() {
@@ -34,6 +35,13 @@ function Signup() {
             value={passwordRepeated}
             onChangeText={setPasswordRepeated}
           />
+
+          <View>
+            <Link href='/login'>
+              <ThemedText>Already have one?</ThemedText>
+              <ThemedText className='text-blue-500'> Login</ThemedText>
+            </Link>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>

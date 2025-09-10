@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
-import { useKeyboardDismiss } from '@hooks/useKeyboardDismiss';
 import ThemedInput from '@ui/ThemedInput';
-import ThemedLink from '@ui/ThemedLink';
 import ThemedText from '@ui/ThemedText';
+import { Link } from 'expo-router';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const KeyboardDismissWrapper = useKeyboardDismiss();
 
   return (
     <KeyboardAvoidingView
@@ -31,12 +28,12 @@ function Login() {
             onChangeText={setPassword}
           />
 
-          <ThemedText>
-            Don't have an account?
-            <ThemedLink to='/login'>
-              <ThemedText className='text-blue-600'>Sign Up</ThemedText>
-            </ThemedLink>
-          </ThemedText>
+          <View>
+            <Link href='/signup'>
+              <ThemedText>Don't have an account?</ThemedText>
+              <ThemedText className='text-blue-500'> Sign Up</ThemedText>
+            </Link>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
