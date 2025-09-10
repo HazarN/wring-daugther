@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
+import LinkText from '@ui/LinkText';
+import ThemedButton from '@ui/ThemedButton';
 import ThemedInput from '@ui/ThemedInput';
 import ThemedText from '@ui/ThemedText';
-import { Link } from 'expo-router';
-import { useState } from 'react';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -36,12 +37,15 @@ function Signup() {
             onChangeText={setPasswordRepeated}
           />
 
-          <View>
-            <Link href='/login'>
-              <ThemedText>Already have one?</ThemedText>
-              <ThemedText className='text-blue-500'> Login</ThemedText>
-            </Link>
+          <View className='flex flex-row items-center'>
+            <ThemedText>Already have one?</ThemedText>
+
+            <LinkText to={'/login'}>Sign Up</LinkText>
           </View>
+
+          <ThemedButton full inverted className='mt-2'>
+            Register
+          </ThemedButton>
         </View>
       </View>
     </KeyboardAvoidingView>

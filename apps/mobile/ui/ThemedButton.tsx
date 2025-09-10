@@ -1,24 +1,27 @@
-import { Pressable, PressableProps } from 'react-native';
+import { Pressable, PressableProps, Text } from 'react-native';
 
 import { useTheme } from '@hooks/useTheme';
-
-import ThemedText from '@ui/ThemedText';
 
 type Props = {
   children: React.ReactNode;
   className?: PressableProps['className'];
   full?: boolean;
+  inverted?: boolean;
   onPress?: () => {};
 };
-function ThemedButton({ children, className, full, onPress }: Props) {
+function ThemedButton({ children, className, full, inverted, onPress }: Props) {
   const { theme } = useTheme();
 
   return (
     <Pressable
-      className={`rounded-2xl border py-12
+      className={`rounded-2xl border py-4
         ${full ? 'w-full' : 'px-20'}
         ${
-          theme === 'dark'
+          inverted
+            ? theme === 'dark'
+              ? 'bg-surface-light border-border-light active:bg-surface-light-hover'
+              : 'bg-surface-dark border-border-dark active:bg-surface-dark-hover'
+            : theme === 'dark'
             ? 'bg-surface-dark border-border-dark active:bg-surface-dark-hover'
             : 'bg-surface-light border-border-light active:bg-surface-light-hover'
         }
@@ -26,7 +29,19 @@ function ThemedButton({ children, className, full, onPress }: Props) {
       `}
       onPress={onPress}
     >
-      <ThemedText className='text-center'>{children}</ThemedText>
+      <Text
+        className={`font-dactilo text-center ${
+          inverted
+            ? theme === 'dark'
+              ? 'text-text-light'
+              : 'text-text-dark'
+            : theme === 'dark'
+            ? 'text-text-dark'
+            : 'text-text-light'
+        }`}
+      >
+        {children}
+      </Text>
     </Pressable>
   );
 }
