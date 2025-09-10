@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
+    "start": "node launch.cjs",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
     "@expo-google-fonts/roboto-mono": "^0.4.0",
+    "axios": "^1.11.0",
     "expo": "~53.0.22",
     "expo-constants": "~17.1.7",
     "expo-font": "~13.3.2",
@@ -19,6 +20,7 @@
     "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-native": "0.79.5",
+    "react-native-dotenv": "^3.4.11",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
@@ -28,6 +30,8 @@
     "@babel/core": "^7.25.2",
     "@tsconfig/react-native": "^3.0.6",
     "@types/react": "~19.0.10",
+    "babel-preset-expo": "^54.0.0",
+    "dotenv": "^17.2.2",
     "typescript": "~5.8.3"
   },
   "private": true

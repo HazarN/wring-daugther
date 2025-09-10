@@ -5,14 +5,34 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["app/*"],
-      "@features/*": ["features/*"],
-      "@ui/*": ["ui/*"],
-      "@utils/*": ["utils/*"],
-      "@hooks/*": ["hooks/*"],
-      "@context/*": ["context/*"],
-      "@styles/*": ["styles/*"]
+      "@app/*": [
+        "app/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+      "@ui/*": [
+        "ui/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@context/*": [
+        "context/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "nativewind-env.d.ts", "hooks/useThemedStack.tss"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "types/nativewind-env.d.ts",
+    "hooks/useThemedStack.tss",
+    "nativewind-env.d.ts"
+  ]
 }

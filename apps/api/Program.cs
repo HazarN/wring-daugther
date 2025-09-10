@@ -15,19 +15,43 @@ using api.Exceptions;
 DotEnv.Load();
 
 // .env Dependencies
+var apiPort = Environment.GetEnvironmentVariable("API_PORT");
+var mobilePort = Environment.GetEnvironmentVariable("MOBILE_PORT");
+var ip1 = Environment.GetEnvironmentVariable("IP_ONE");
 var cnn = Environment.GetEnvironmentVariable("DB_URI");
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5500";
 var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
 
-if (string.IsNullOrEmpty(secret))
-    throw new DotEnvException("JWT_SECRET");
+if (
+       string.IsNullOrEmpty(secret)
+    || string.IsNullOrEmpty(apiPort)
+    || string.IsNullOrEmpty(mobilePort)
+    || string.IsNullOrEmpty(ip1)
+)
+    throw new DotEnvException("One or more of the .env variables");
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Exposing the backend
+builder.WebHost.UseUrls($"http://localhost:{apiPort}", $"http://{ip1}:{apiPort}");
 
 // PostgreSQL Database Connection
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseNpgsql(cnn)
 );
+
+// CORS Policy Configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowExpo",
+        policy => policy.WithOrigins(
+            $"http://{ip1}:{mobilePort}",
+            $"http://localhost:{mobilePort}"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
@@ -83,6 +107,8 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseCors("AllowExpo");
+
 // Scalar for API testing
 app.MapOpenApi();
 app.MapScalarApiReference();
@@ -97,5 +123,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-builder.WebHost.UseUrls($"http://localhost:{port}");
 app.Run();

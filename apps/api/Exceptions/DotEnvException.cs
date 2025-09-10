@@ -3,7 +3,7 @@ namespace api.Exceptions
     public class DotEnvException : Exception
     {
         public DotEnvException(string variableName)
-            : base($"Environment variable '{variableName}' is missing. Please set it in your .env file.")
+            : base($"{variableName} is(are) missing. Please set it in your .env file.")
         { }
     }
 }

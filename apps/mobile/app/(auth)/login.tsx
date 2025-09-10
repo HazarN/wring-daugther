@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
-import { useTheme } from '@hooks/useTheme';
-
+import { useAxios } from '@hooks/useAxios';
 import LinkText from '@ui/LinkText';
 import ThemedButton from '@ui/ThemedButton';
 import ThemedInput from '@ui/ThemedInput';
@@ -12,7 +11,8 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { theme } = useTheme();
+  const axios = useAxios();
+  const testAxios = () => axios.post('Auth/login', { username: 'HazarN', password: 'HazarN5.' });
 
   return (
     <KeyboardAvoidingView
@@ -39,7 +39,7 @@ function Login() {
             <LinkText to={'/signup'}>Sign Up</LinkText>
           </View>
 
-          <ThemedButton full className='mt-2' inverted>
+          <ThemedButton full className='mt-2' inverted onPress={testAxios}>
             Login
           </ThemedButton>
         </View>
