@@ -17,7 +17,7 @@ DotEnv.Load();
 // .env Dependencies
 var apiPort = Environment.GetEnvironmentVariable("API_PORT");
 var mobilePort = Environment.GetEnvironmentVariable("MOBILE_PORT");
-var ip1 = Environment.GetEnvironmentVariable("IP_ONE");
+var ip = Environment.GetEnvironmentVariable("IP_FO");
 var cnn = Environment.GetEnvironmentVariable("DB_URI");
 var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
 
@@ -25,14 +25,14 @@ if (
        string.IsNullOrEmpty(secret)
     || string.IsNullOrEmpty(apiPort)
     || string.IsNullOrEmpty(mobilePort)
-    || string.IsNullOrEmpty(ip1)
+    || string.IsNullOrEmpty(ip)
 )
     throw new DotEnvException("One or more of the .env variables");
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Exposing the backend
-builder.WebHost.UseUrls($"http://localhost:{apiPort}", $"http://{ip1}:{apiPort}");
+builder.WebHost.UseUrls($"http://localhost:{apiPort}", $"http://{ip}:{apiPort}");
 
 // PostgreSQL Database Connection
 builder.Services.AddDbContext<AppDbContext>(
@@ -45,7 +45,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(
         "AllowExpo",
         policy => policy.WithOrigins(
-            $"http://{ip1}:{mobilePort}",
+            $"http://{ip}:{mobilePort}",
             $"http://localhost:{mobilePort}"
         )
         .AllowAnyHeader()

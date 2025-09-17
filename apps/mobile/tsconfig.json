@@ -5,27 +5,14 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
-      "@features/*": [
-        "features/*"
-      ],
-      "@ui/*": [
-        "ui/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@context/*": [
-        "context/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ]
+      "@app/*": ["app/*"],
+      "@features/*": ["features/*"],
+      "@ui/*": ["ui/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"],
+      "@styles/*": ["styles/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": [

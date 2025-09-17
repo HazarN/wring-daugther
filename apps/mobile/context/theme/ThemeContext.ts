@@ -1,4 +1,6 @@
 import { createContext } from 'react';
 
-const ThemeContext = createContext({ theme: 'dark', toggle: () => {} });
+import ThemeContextType from '@models/ThemeContextType';
+
+const ThemeContext = createContext<ThemeContextType>({ theme: 'dark', toggle: () => {} });
 export default ThemeContext;

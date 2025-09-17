@@ -4,7 +4,7 @@ import { useColorScheme } from 'react-native';
 
 import ThemeContext from '@context/theme/ThemeContext';
 
-type ThemeType = 'light' | 'dark';
+type Theme = 'light' | 'dark';
 type Props = {
   children: React.ReactNode;
 };
@@ -12,14 +12,14 @@ function ThemeProvider({ children }: Props) {
   const systemScheme = useColorScheme();
   const appTheme = Constants.expoConfig?.userInterfaceStyle ?? 'system';
 
-  const [theme, setTheme] = useState<ThemeType>((): ThemeType => {
-    if (appTheme === 'system') return (systemScheme ?? 'dark') as ThemeType;
-    return (appTheme ?? 'dark') as ThemeType;
+  const [theme, setTheme] = useState<Theme>((): Theme => {
+    if (appTheme === 'system') return (systemScheme ?? 'dark') as Theme;
+    return (appTheme ?? 'dark') as Theme;
   });
 
   useEffect(() => {
     if (appTheme === 'system') {
-      setTheme((systemScheme ?? 'light') as ThemeType);
+      setTheme((systemScheme ?? 'light') as Theme);
     }
   }, [systemScheme]);
 

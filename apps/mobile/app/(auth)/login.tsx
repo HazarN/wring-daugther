@@ -12,7 +12,11 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const axios = useAxios();
-  const testAxios = () => axios.post('Auth/login', { username: 'HazarN', password: 'HazarN5.' });
+  const testAxios = () =>
+    axios
+      .post('Auth/login', { username: 'HazarN', password: 'HazarN5.' })
+      .then((res) => console.info(res.data))
+      .catch((err) => console.error('An error occured: ', err));
 
   return (
     <KeyboardAvoidingView
@@ -39,7 +43,7 @@ function Login() {
             <LinkText to={'/signup'}>Sign Up</LinkText>
           </View>
 
-          <ThemedButton full className='mt-2' inverted onPress={testAxios}>
+          <ThemedButton full className='mt-2' onPress={testAxios}>
             Login
           </ThemedButton>
         </View>
