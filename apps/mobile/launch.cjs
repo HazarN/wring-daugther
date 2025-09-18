@@ -3,8 +3,6 @@ const { spawn } = require('child_process');
 
 const PORT = process.env.EXPO_PORT;
 
-const expo = spawn('expo', ['start', '--port', PORT], { stdio: 'inherit' });
+const expo = spawn('npx', ['expo', 'start', '--port', PORT], { stdio: 'inherit', shell: true });
 
-expo.on('close', (code) => {
-  console.log(`Expo process exited with code ${code}`);
-});
+expo.on('close', (code) => console.log(`Expo process exited with code ${code}`));

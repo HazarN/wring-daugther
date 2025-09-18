@@ -11,28 +11,35 @@ using api.Data;
 using api.Repositories;
 using api.Services;
 using api.Exceptions;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 DotEnv.Load();
 
 // .env Dependencies
 var apiPort = Environment.GetEnvironmentVariable("API_PORT");
 var mobilePort = Environment.GetEnvironmentVariable("MOBILE_PORT");
-var ip = Environment.GetEnvironmentVariable("IP_FO");
 var cnn = Environment.GetEnvironmentVariable("DB_URI");
 var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
 
 if (
        string.IsNullOrEmpty(secret)
     || string.IsNullOrEmpty(apiPort)
     || string.IsNullOrEmpty(mobilePort)
-    || string.IsNullOrEmpty(ip)
 )
     throw new DotEnvException("One or more of the .env variables");
 
 var builder = WebApplication.CreateBuilder(args);
 
+var networkService = new NetworkService(builder.Configuration);
+var goodIp = networkService.GetActiveIp();
+
+// Network service to get the current IP address
+builder.Services.AddSingleton<INetworkService, NetworkService>();
+
 // Exposing the backend
-builder.WebHost.UseUrls($"http://localhost:{apiPort}", $"http://{ip}:{apiPort}");
+builder.WebHost.UseUrls($"http://localhost:{apiPort}", $"http://{goodIp}:{apiPort}");
 
 // PostgreSQL Database Connection
 builder.Services.AddDbContext<AppDbContext>(
@@ -45,7 +52,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(
         "AllowExpo",
         policy => policy.WithOrigins(
-            $"http://{ip}:{mobilePort}",
+            $"http://{goodIp}:{mobilePort}",
             $"http://localhost:{mobilePort}"
         )
         .AllowAnyHeader()
