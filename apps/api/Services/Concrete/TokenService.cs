@@ -6,8 +6,9 @@ using Microsoft.IdentityModel.Tokens;
 
 using api.Entities;
 using api.Exceptions;
+using api.Services.Abstract;
 
-namespace api.Services
+namespace api.Services.Concrete
 {
     public class TokenService(IConfiguration configuration) : ITokenService
     {

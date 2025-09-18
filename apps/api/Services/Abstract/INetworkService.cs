@@ -1,4 +1,4 @@
-namespace api.Services
+namespace api.Services.Abstract
 {
     public interface INetworkService
     {

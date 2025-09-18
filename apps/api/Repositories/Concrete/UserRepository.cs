@@ -2,8 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 using api.Data;
 using api.Entities;
+using api.Repositories.Abstract;
 
-namespace api.Repositories
+namespace api.Repositories.Concrete
 {
     public class UserRepository(AppDbContext context) : IUserRepository
     {

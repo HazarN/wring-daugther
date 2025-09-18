@@ -1,8 +1,8 @@
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using api.Services;
+using api.Services.Abstract;
 
-namespace api.Services
+namespace api.Services.Concrete
 {
     public class NetworkService : INetworkService
     {

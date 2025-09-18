@@ -1,18 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.RateLimiting;
 using Scalar.AspNetCore;
 using System.Text;
 using System.Threading.RateLimiting;
 using dotenv.net;
 
 using api.Data;
-using api.Repositories;
-using api.Services;
 using api.Exceptions;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
+using api.Services.Concrete;
+using api.Services.Abstract;
+using api.Repositories.Abstract;
+using api.Repositories.Concrete;
 
 DotEnv.Load();
 

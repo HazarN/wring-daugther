@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Identity;
 
 using api.Entities;
 using api.Models;
-using api.Repositories;
+using api.Repositories.Abstract;
+using api.Services.Abstract;
 
-namespace api.Services
+namespace api.Services.Concrete
 {
     public class AuthService(IUserRepository userRepository, ITokenService tokenService) : IAuthService
     {

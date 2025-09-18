@@ -1,6 +1,6 @@
 using api.Entities;
 
-namespace api.Repositories
+namespace api.Repositories.Abstract
 {
     public interface IUserRepository
     {

@@ -1,7 +1,7 @@
 using api.Entities;
 using api.Models;
 
-namespace api.Services
+namespace api.Services.Abstract
 {
     public interface IAuthService
     {

@@ -1,7 +1,8 @@
 using api.Entities;
-using api.Repositories;
+using api.Repositories.Abstract;
+using api.Services.Abstract;
 
-namespace api.Services
+namespace api.Services.Concrete
 {
     public class UserService(IUserRepository userRepository) : IUserService
     {
