@@ -1,8 +1,11 @@
 import { API_URL } from '@env';
 import axios, { AxiosInstance } from 'axios';
 import { useEffect, useMemo } from 'react';
+import { useAuth } from './useAuth';
 
 export function useAxios() {
+  const { accessToken, refreshToken, logout, setAccessToken } = useAuth();
+
   const axiosInstance: AxiosInstance = useMemo(
     () =>
       axios.create({
@@ -19,10 +22,7 @@ export function useAxios() {
     // Request interceptor
     const requestInterceptor = axiosInstance.interceptors.request.use(
       async (config) => {
-        // FIXME
-        const token = null;
-
-        if (token) config.headers.Authorization = `Bearer ${token}`;
+        if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
         return config;
       },
@@ -32,10 +32,26 @@ export function useAxios() {
     // Response interceptor
     const responseInterceptor = axiosInstance.interceptors.response.use(
       (response) => response,
-      (err) => {
-        if (err.response.status === 401) console.warn('Unauthorized! Redirect to login.');
+      async (err) => {
+        if (err.response?.status === 401 && refreshToken) {
+          try {
+            const res = await axiosInstance.post(`Auth/refresh-token`, {
+              refreshToken,
+              // FIXME also userId needed
+            });
 
-        return Promise.reject();
+            const newAccessToken = res.data.accessToken;
+            setAccessToken(newAccessToken);
+
+            err.config.headers.Authorization = `Bearer ${newAccessToken}`;
+            return axiosInstance(err.config);
+          } catch (refreshErr) {
+            console.warn('Refresh failed, logging out...');
+            logout();
+          }
+        }
+
+        return Promise.reject(err);
       }
     );
 
